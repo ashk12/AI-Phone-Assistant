@@ -189,13 +189,21 @@ class MultiIntentPhoneSystem:
         return results
 
     
+    def normalize_name(self,name: str) -> str:
+        # Lowercase, remove non-alphanumeric
+        return re.sub(r'[^a-z0-9]', '', name.lower())
+
     def find_phones_by_name(self, phone_names: list) -> list:
-        """Find specific phones by name matching"""
         found_phones = []
+        normalized_products = [
+            (product, self.normalize_name(product['brand'] + " " + product['name']))
+            for product in self.products
+        ]
+
         for name in phone_names:
-            name_lower = name.lower()
-            for product in self.products:
-                if name_lower in product['name'].lower() or name_lower in product['brand'].lower():
+            norm_name = self.normalize_name(name)
+            for product, norm_product_name in normalized_products:
+                if norm_name in norm_product_name:
                     found_phones.append(product)
                     break
         return found_phones

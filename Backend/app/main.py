@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import routes
+from app.config import FRONTEND_URL
 
 app = FastAPI(
     title="Phone AI Assistant",

@@ -42,7 +42,7 @@ function App() {
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "⚠️ Error connecting to backend." },
+        { sender: "bot", text: "Error connecting to backend." },
       ]);
     } finally {
       setLoading(false);
