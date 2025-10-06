@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import "./App.css";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [query, setQuery] = useState("");
@@ -22,7 +23,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/chat/", {
+      const res = await fetch(`${BACKEND_URL}/chat/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),
